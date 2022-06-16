@@ -1,6 +1,9 @@
-FROM node:lts-alpine3.16
-WORKDIR /usr/src/app
+FROM node:dubnium-alpine3.11
+WORKDIR /usr/app
 COPY . .
-RUN npm i
-EXPOSE 3000
-CMD [ "npm", "run", "start"]
+RUN npm install
+RUN npm install sequelize-cli -g
+RUN npx sequelize db:migrate
+EXPOSE 5000
+CMD [ "npm", "start" ]
+
