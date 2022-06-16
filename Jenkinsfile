@@ -5,8 +5,9 @@ def branch = 'master'
 
 pipeline{
         agent any
-	stages{"verify tooling) {
-	       steps {
+	stages{
+		stage("verify tooling") {
+	           steps {
 		       sh '''
 		       docker version
 		       docker info
