@@ -1,49 +1,43 @@
-def secret = 'pinoezz'
+def secret = 'jenkins'
 def server = 'jenkins@103.171.85.155'
 def directory = 'wayshub-frontend'
 def branch = 'master'
 
 pipeline{
-        agent any
+	agent any
 	stages{
-            stage ('compose down and pull'){
+	    stage ('compose down and pull'){
             steps{
                 sshagent([secret]) {
-                    sh '''
-                    ssh -o StrictHostkeyChecking=no -l ${server} << EOF
+                    sh """ssh -o StrictHostkeyChecking=no ${server} << EOF
                     cd ${directory}
                     docker-compose down
                     docker system prune -f
                     git pull origin ${branch}
                     exit
-                    EOF
-                    '''
+                    EOF"""
                 }
             }
         }
 	stage ('build images'){
             steps{
                 sshagent([secret]) {
-                    sh '''
-                    ssh -o StrictHostkeyChecking=no ${server} << EOF
+                    sh """ssh -o StrictHostkeyChecking=no ${server} << EOF
                     cd ${directory}
                     docker-compose build
-                    exit
-                    EOF
-                    '''
+		    exit
+                    EOF"""
                  }
              }
         }
         stage ('deploy'){
             steps{
                 sshagent([secret]) {
-                    sh '''
-                    ssh -o StrictHostkeyChecking=no ${server} << EOF
+                    sh """ssh -o StrictHostkeyChecking=no ${server} << EOF
                     cd ${directory}
                     docker-compose up -d
                     exit
-                    EOF
-		    '''
+                    EOF"""
                 }
             }
         }
