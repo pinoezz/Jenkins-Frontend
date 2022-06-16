@@ -1,5 +1,5 @@
 def secret = 'pinoezz'
-def server = 'https://jenkins.alfino.studentdumbways.my.id/job/Frontend/'
+def server = 'https://jenkins.alfino.studentdumbways.my.id/'
 def directory = 'wayshub-frontend'
 def branch = 'master'
 
