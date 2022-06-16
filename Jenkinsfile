@@ -4,12 +4,12 @@ def directory = 'wayshub-frontend'
 def branch = 'master'
 
 pipeline{
-    agent any
-    stages{
-        stage ('compose down & pull'){
+	agent any
+	stages{
+	    stage ('compose down and pull'){
             steps{
                 sshagent([secret]) {
-                    sh """ssh -o StrictHostKeyChecking=no ${server} << EOF
+                    sh """ssh -o StrictHostkeyChecking=no ${server} << EOF
                     cd ${directory}
                     docker-compose down
                     docker system prune -f
@@ -19,21 +19,21 @@ pipeline{
                 }
             }
         }
-        stage ('docker build'){
+	stage ('build images'){
             steps{
                 sshagent([secret]) {
-                    sh """ssh -o StrictHostKeyChecking=no ${server} << EOF
+                    sh """ssh -o StrictHostkeyChecking=no ${server} << EOF
                     cd ${directory}
                     docker-compose build
-                    exit
+		            exit
                     EOF"""
-                }
-            }
+                 }
+             }
         }
-        stage ('docker up'){
+        stage ('deploy'){
             steps{
                 sshagent([secret]) {
-                    sh """ssh -o StrictHostKeyChecking=no ${server} << EOF
+                    sh """ssh -o StrictHostkeyChecking=no ${server} << EOF
                     cd ${directory}
                     docker-compose up -d
                     exit
