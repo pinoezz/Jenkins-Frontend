@@ -3,7 +3,7 @@ services:
  frontend:
    build: .
    container_name: fe
-   image: arahmane/wayshub-fe:stable
+   image: pino/wayshub-fe:stable
    stdin_open: true
    ports:
     - 3030:3000
