@@ -10,7 +10,7 @@ pipeline{
             steps{
                 sshagent([secret]) {
                     sh '''
-                    ssh -o StrictHostkeyChecking=no ${server} << EOF
+                    ssh -h StrictHostkeyChecking=no ${server} << EOF
                     cd ${directory}
                     docker-compose down
                     docker system prune -f
