@@ -18,7 +18,6 @@ pipeline{
 	       }
 	   }
 		
-        stages{
             stage ('compose down and pull'){
             steps{
                 sshagent([secret]) {
