@@ -4,9 +4,9 @@ def directory = 'wayshub-frontend'
 def branch = 'master'
 
 pipeline{
-	agent any
-	stages{
-	    stage ('compose down and pull'){
+        agent any
+        stages{
+            stage ('compose down and pull'){
             steps{
                 sshagent([secret]) {
                     sh """ssh -o StrictHostkeyChecking=no ${server} << EOF
@@ -25,7 +25,7 @@ pipeline{
                     sh """ssh -o StrictHostkeyChecking=no ${server} << EOF
                     cd ${directory}
                     docker-compose build
-		            exit
+                    exit
                     EOF"""
                  }
              }
