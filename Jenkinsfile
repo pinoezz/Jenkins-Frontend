@@ -8,7 +8,7 @@ pipeline{
 	stages{
 	    stage ('compose down and pull'){
             steps{
-                sshagent(credentials: ['pinoezz']) {
+                sshagent(credentials: [secret]) {
                     sh """ssh -o StrictHostkeyChecking=no ${server} << EOF
                     cd ${directory}
                     docker-compose down
