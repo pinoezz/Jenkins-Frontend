@@ -1,4 +1,4 @@
-def secret = 'pinoezz'
+def secret = 'github-pinoezz'
 def server = 'jenkins@103.171.85.155'
 def directory = 'wayshub-frontend'
 def branch = 'master'
@@ -8,7 +8,7 @@ pipeline{
 	stages{
 	    stage ('compose down and pull'){
             steps{
-                sshagent(credentials: [github-pinoezz]) {
+                sshagent([secret]) {
                     sh """ssh -o StrictHostkeyChecking=no ${server} << EOF
                     cd ${directory}
                     docker-compose down
