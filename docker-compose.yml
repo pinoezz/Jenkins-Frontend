@@ -3,11 +3,7 @@ services:
  frontend:
    build: .
    container_name: fe
-<<<<<<< HEAD
-   image: pino/wayshub-fe:stable
-=======
    image: pinoezz/wayshub-fe:stable
->>>>>>> f89d2aacf4b75be592425e9c7079262f943bdf26
    stdin_open: true
    ports:
     - 3030:3000
